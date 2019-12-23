@@ -8,7 +8,7 @@ class Product {
         this.description = description;
         this.url = url;
     }
-    
+
 }
 
 // ============= Cart Class ===================///
@@ -18,9 +18,9 @@ class Cart {
         this.name = name;
         this.description = description;
         this.price = price;
-    
+
     }
-    
+
 }
 
 let productlist = [];
@@ -30,8 +30,6 @@ let t = 0;
 let subtotal = [];
 let subT = 0;
 let tax = 0;
-let paymentOption = document.getElementById("CheckOutOptions");
-document.getElementById("CheckOutOptions").addEventListener("change", paymentMethod);
 
 
 
@@ -54,26 +52,30 @@ addProduct("Iced Tea", 3, "drinks", "This is a cold iced tea",'images/IcedTea.pn
 
 // ================ Items Loop ===================//
 
-for (i; i<=productlist.length; i++){
+for (i; i <= productlist.length; i++) {
 
     createProductCard(i);
 }
 // ================ CartItems Loop ===================//
 
+// for (t; t<=cartList.length; t++){
+
+//     createCartItem(t);
+// }
 
 
 // ========FUNCTIONS ============//
-function addProduct(name, category, description, price, url){
+function addProduct(name, category, description, price, url) {
 
     productlist.push(new Product(name, category, description, price, url));
 }
 
-function createProductCard(i){
+function createProductCard(i) {
     // console.log(i);
-    let productCard = 
-    `
+    let productCard =
+        `
     <div class="card" >
-    <img src="${productlist[i].url}" height="150px" width="150px" class="card-img-top" alt="...">
+    <img src="${productlist[i].url}" height="120px" width="150px" class="card-img-top" alt="...">
     <div class="card-body">
     <h6 class="card-title">${productlist[i].name}</h6>
     <p class="card-text">${productlist[i].description}</p>
@@ -82,39 +84,37 @@ function createProductCard(i){
     <a href="#" onclick="addToCart('${productlist[i].name}','${productlist[i].description}','${productlist[i].price}')" class="btn-sm btn-primary" align="center" style="display: block">Add to Cart</a>
     </div>`;
     document.getElementById('productCards').innerHTML += productCard;
-    
+
 
 }
 
-function createCartItem(t){
-    let cartItem = 
-    `   <tr id="itemid${t}">
+function createCartItem(t) {
+    let cartItem =
+        `   <tr id="itemid${t}">
             <th scope="row"><a href="#" onclick="removeCartItem(${t})"<i class="fa fa-minus-square"></i></a></th>
             <td>${cartList[t].name}</td>
             <td>${cartList[t].description}</td>
             <td style="color: green">$${cartList[t].price}</td>
         </tr>`;
     document.getElementById('CartItems').innerHTML += cartItem;
-    
+
 
 }
 
-function addToCart(name, description, price){
+function addToCart(name, description, price) {
 
     let t = cartList.length;
-    cartList.push(new Cart (name, description, Number(price)));
+    cartList.push(new Cart(name, description, Number(price)));
     createCartItem(t);
     cartMath();
-  
+    // console.log(cartList);
 
 
 }
 
 function removeCartItem(t){
-   
-    document.getElementById(`itemid${t}`).remove();
     cartList.splice(t, 1);
-    
+    document.getElementById(`itemid${t}`).remove();
     if (cartList.length === 0){
         subT = 0;
         tax = 0;
@@ -133,14 +133,14 @@ function removeCartItem(t){
 
 }
 
-function itemsInCart(t){
+function itemsInCart(t) {
 
     t = 0;
-    for (t; t<=cartList.length; t++){
-    
-    createCartItem(t);
+    for (t; t <= cartList.length; t++) {
 
-}
+        createCartItem(t);
+
+    }
 
 }
 
@@ -154,22 +154,6 @@ function cartMath(){
     let total = 0;
 
 
-    if (cartList.length === 0){
-        subT = 0;
-        tax = 0;
-        total = 0;
-
-        document.getElementById("subtotal").innerHTML = "$ " + subT;
-        document.getElementById("tax").innerHTML = "$ " + tax;
-        document.getElementById("total").innerHTML = "$ " + total;
-
-    } else {
-    
-    
-    
-    
-
-
     for (s; s <= cartList.length; s++){
 
         subT = subT + cartList[s].price;
@@ -181,38 +165,65 @@ function cartMath(){
     }
 
     
-}
+    
     
 }
 
 
 // ================ Show Checkout Fields ===================//
 
-function showTotals(tax, subT, total){
-    
-        document.getElementById("subtotal").innerHTML = "$ " + subT;
-        document.getElementById("tax").innerHTML = "$ " + tax;
-        document.getElementById("total").innerHTML = "$ " + total;
+function showTotals(tax, subT, total) {
 
-    
+
+
+    document.getElementById("subtotal").innerHTML = "$ " + subT;
+    document.getElementById("tax").innerHTML = "$ " + tax;
+    document.getElementById("total").innerHTML = "$ " + total;
+
 }
 
+// ====== Payment Method Options - Selecting a payment on the dropdown ====== //
 
-function paymentMethod(){
-    // let option = document.getElementById("CheckOutOptions");
+let paymentOption = document.getElementById("CheckOutOptions").value;
+document.getElementById("CheckOutOptions").addEventListener("change", paymentMethod());
 
-    if (paymentOption.value === "Cash"){
+function paymentMethod() {
+    let paymentOption = document.getElementById("CheckOutOptions").value;
+
+    if (paymentOption === "Cash") {
         document.getElementById("CashCheckOut").className = "CashCheckOut";
-        document.getElementById("CardCheckOut").className = "CardCheckOutNone";
-    } else if (paymentOption.value === "Credit Card") {
+        document.getElementById("CreditCheckOut").className = "CreditCheckOutNone";
+    } else if (paymentOption === "Credit Card") {
         document.getElementById("CashCheckOut").className = "CashCheckOutNone";
-        document.getElementById("CardCheckOut").className = "CardCheckOut";
-    } else if  (paymentOption.value === "----") {
+        document.getElementById("CreditCheckOut").className = "CreditCheckOut";
+    } else if (paymentOption === "----") {
         document.getElementById("CashCheckOut").className = "CashCheckOutNone";
-        document.getElementById("CardCheckOut").className = "CardCheckOutNone";
-        
-
+        document.getElementById("CreditCheckOut").className = "CreditCheckOutNone";
     }
 }
-// // let paymentOption = document.getElementById("CheckOutOptions");
-// document.getElementById("CheckOutOptions").addEventListener("change", test);
+
+
+
+
+
+
+
+
+
+
+paymentMethod();
+// console.log();
+
+function amountDue(event) {
+    let amountPaid = event.target.value;
+    // let total = cartMath();
+    if (amountPaid >= total) {
+        let changeDue = amountPaid - total;
+        document.getElementById("changeDue").innerHTML = "$ " + changeDue;
+        console.log("Change Amount: " + changeDue); 
+
+
+    }
+
+    // console.log("something");
+}
