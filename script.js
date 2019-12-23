@@ -30,6 +30,8 @@ let t = 0;
 let subtotal = [];
 let subT = 0;
 let tax = 0;
+let total = 0;
+let totalsObj = [];
 
 
 
@@ -154,6 +156,7 @@ function cartMath(){
     let total = 0;
 
 
+
     for (s; s <= cartList.length; s++){
 
         subT = subT + cartList[s].price;
@@ -161,11 +164,9 @@ function cartMath(){
         total = tax + subT;
         
         showTotals(tax.toFixed(2), subT.toFixed(2), total.toFixed(2));
+        
 
     }
-
-    
-    
     
 }
 
@@ -174,11 +175,13 @@ function cartMath(){
 
 function showTotals(tax, subT, total) {
 
-
+    totalsObj = [tax, subT, total];
 
     document.getElementById("subtotal").innerHTML = "$ " + subT;
     document.getElementById("tax").innerHTML = "$ " + tax;
     document.getElementById("total").innerHTML = "$ " + total;
+
+    return totalsObj;
 
 }
 
@@ -215,14 +218,15 @@ function paymentMethod() {
 paymentMethod();
 // console.log();
 
-function amountDue(event) {
-    let amountPaid = event.target.value;
+function amountDue(totalsObj){
+    let amountEntered = document.getElementById("amountPaid");
+    let amountPaid = Number(amountEntered.value);
+    let amountDue = Number(totalsObj[2]);
     // let total = cartMath();
-    if (amountPaid >= total) {
-        let changeDue = amountPaid - total;
-        document.getElementById("changeDue").innerHTML = "$ " + changeDue;
-        console.log("Change Amount: " + changeDue); 
-
+    if (amountPaid >= amountDue) {
+        let changeDue = amountPaid - amountDue;
+        document.getElementById("changeDue").innerHTML = "$ " + changeDue.toFixed(2);
+        // console.log("Change Amount: " + changeDue);
 
     }
 

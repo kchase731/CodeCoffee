@@ -3,12 +3,10 @@
 
 <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=768, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Coffee Shop</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/style.css">
 </head>
@@ -91,31 +89,34 @@
                                         </select>
                                 </div>
                         </div>
-                        <div class="CheckOutNone" id="CashCheckOut">
-                                <div class="row  checkoutpadding">
+                        <div class="CashCheckOutNone" id="CashCheckOut">
+                                <div class="row checkoutpadding">
                                         <div class="col-sm-4 d-flex flex-row-reverse">
                                                 <h6 style>Amount Paid</h6>
                                         </div>
-                                        <div class="col-sm-4 d-flex flex-row-reverse"><input id="amountPaid" size="10"></input></div>
+                                        <div class="col-sm-4 d-flex flex-row-reverse"><input class="cashPayment" id="amountPaid" size="10" onchange="amountDue(totalsObj);"></input></div>
                                 </div>
                                 <div class="row changeDue">
                                         <div class="col-sm-4 d-flex flex-row-reverse">
                                                 <h6 style>Change Due</h6>
                                         </div>
-                                        <div class="col-sm-5 d-flex flex-row-reverse">
+                                        <div class="col-sm-4 d-flex flex-row-reverse">
                                                 <h6 id="changeDue"></h6>
                                         </div>
-                                </div>
+                                        
+                                </div><div class="row"><br> <div class="col-sm-6 d-flex flex-row-reverse checkoutbtn"><input type="submit" value="Submit" class="btn btn-primary btn-lg"></div></div>
                         </div>
 
-                        <div class="CreditCheckOutNone" id="CreditCheckOut">
-                                <div class="row checkOut">
+                        <div class="CreditCheckOutNone" id="CreditCheckOut" >
+                                <div class="row checkOut ">
+                                        
+                                
                                 <form class="ccPayment" id="ccPayment">
-                                        <input id="ccNum" pattern="[0-9]*" name="creditCardNumber" placeholder="Credit Card Number" required minlength="16" maxlength="16">
-                                        <input id="CVV" pattern="[0-9]*" name="cardVerificationValue" placeholder="CVV" required minlength="3" maxlength="3" ></div>
+                                        <input class="ccPayment" id="ccNum" pattern="[0-9]*" name="creditCardNumber" placeholder="Credit Card Number" required minlength="16" maxlength="16">
+                                        <input class="ccPayment" id="CVV" pattern="[0-9]*" name="cardVerificationValue" placeholder="CVV" required minlength="3" maxlength="3" ></div>
                                 
                                         <label for="MM">Exp Mo</label>
-                                        <select name="expMo" id="MM">
+                                        <select class="ccPayment" name="expMo" id="MM">
                                             <option value="01">01</option>
                                             <option value="02">02</option>
                                             <option value="03">03</option>
@@ -129,9 +130,9 @@
                                             <option value="11">11</option>
                                             <option value="12">12</option>
                                         </select>
-                                
+                               
                                         <label for="YYYY">Exp Yr</label>
-                                        <select name="expYr" id="YYYY">
+                                        <select class="ccPayment" name="expYr" id="YYYY">
                                             <option value="20">2020</option>
                                             <option value="21">2021</option>
                                             <option value="22">2022</option>
@@ -213,7 +214,7 @@
                                             <option value="98">2098</option>
                                             <option value="99">2099</option>
                                         </select>
-                                        <input type="submit" value="Submit" class="btn btn-primary btn-lg">
+                                       <div class="row"> <div class="col-sm-6 d-flex flex-row-reverse checkoutbtn"><input type="submit" value="Submit" class="btn btn-primary btn-lg"></div></div>
                                     </form>
                         </div></div>
                         <!-- <div class="col-sm-6 d-flex align-items-end flex-column checkoutbtn"><button
