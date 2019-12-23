@@ -190,14 +190,15 @@ document.getElementById("CheckOutOptions").addEventListener("change", paymentMet
 function paymentMethod() {
     let paymentOption = document.getElementById("CheckOutOptions").value;
 
-    if (paymentOption === "Cash") {
-        document.getElementById("CashCheckOut").className = "CashCheckOut";
+    if (paymentOption === "----") {
+        document.getElementById("CashCheckOut").className = "CashCheckOutNone";
         document.getElementById("CreditCheckOut").className = "CreditCheckOutNone";
+
     } else if (paymentOption === "Credit Card") {
         document.getElementById("CashCheckOut").className = "CashCheckOutNone";
         document.getElementById("CreditCheckOut").className = "CreditCheckOut";
-    } else if (paymentOption === "----") {
-        document.getElementById("CashCheckOut").className = "CashCheckOutNone";
+    } else if (paymentOption === "Cash") {
+        document.getElementById("CashCheckOut").className = "CashCheckOut";
         document.getElementById("CreditCheckOut").className = "CreditCheckOutNone";
     }
 }
